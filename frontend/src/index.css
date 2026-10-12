@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+@config '../tailwind.config.js';
+
+@layer base {
+  body {
+    @apply font-sans text-text-secondary bg-white text-body overflow-x-hidden;
+  }
+  
+  h1, .h1 {
+    @apply text-brand-navy font-bold text-h1;
+  }
+  h2, .h2 {
+    @apply text-brand-navy font-bold text-h2;
+  }
+  h3, .h3 {
+    @apply text-brand-navy font-bold text-h3;
+  }
+  .display {
+    @apply text-brand-navy font-bold text-display;
+  }
+}
