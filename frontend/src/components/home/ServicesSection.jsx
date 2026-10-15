@@ -39,7 +39,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-brand-darkBg transition-colors duration-300">
       <Container>
         <SectionHeading 
           title="How We Can Help" 
@@ -47,14 +47,16 @@ const ServicesSection = () => {
           centered={true} 
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12 items-stretch">
           {services.map((service, index) => (
-            <Card key={index} className="flex flex-col h-full border-ui-border hover:border-brand-sky group hover:-translate-y-1 duration-400 hover:shadow-lg">
-              <div className="w-12 h-12 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-sky/10 transition-colors">
+            <Card key={index} className="flex flex-col h-full border-ui-border dark:border-brand-darkBorder hover:border-brand-sky dark:hover:border-brand-sky group hover:-translate-y-1 duration-300 hover:shadow-lg">
+              <div className="w-14 h-14 bg-brand-light dark:bg-brand-darkElevated rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-sky/10 transition-colors flex-shrink-0">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold text-brand-navy mb-3">{service.title}</h3>
-              <p className="text-text-secondary flex-grow leading-relaxed">
+              <h3 className="text-xl font-bold text-brand-navy dark:text-text-darkPrimary mb-3 text-left leading-snug min-h-[3.25rem] md:min-h-[3.5rem] flex items-start">
+                {service.title}
+              </h3>
+              <p className="text-text-secondary dark:text-text-darkSecondary flex-grow leading-relaxed text-sm md:text-base text-left">
                 {service.description}
               </p>
             </Card>

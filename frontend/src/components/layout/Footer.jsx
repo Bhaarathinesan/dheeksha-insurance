@@ -6,7 +6,7 @@ import contactInfo from '../../config/contactInfo';
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-navy text-white pt-16 pb-8">
+    <footer className="bg-brand-navy dark:bg-[#07101B] dark:border-t dark:border-brand-darkBorder text-white pt-16 pb-8 transition-colors duration-300">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-2">
@@ -16,7 +16,7 @@ const Footer = () => {
             <p className="text-brand-light font-medium text-lg mb-2">
               Vehicle Insurance & Claim Assistance
             </p>
-            <p className="text-brand-light opacity-80 max-w-sm mb-6">
+            <p className="text-brand-light opacity-80 max-w-sm mb-6 leading-relaxed">
               Your trusted partner for vehicle insurance and end-to-end claim assistance in Peravurani.
             </p>
           </div>

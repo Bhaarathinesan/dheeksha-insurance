@@ -4,10 +4,10 @@ const Button = ({ children, variant = 'primary', className = '', ...props }) => 
   const baseStyles = "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5";
   
   const variants = {
-    primary: "bg-brand-strong text-white hover:bg-brand-navy hover:shadow-lg focus:ring-brand-strong",
-    secondary: "bg-transparent text-brand-navy border border-ui-border hover:bg-brand-light hover:border-brand-navy focus:ring-brand-navy",
-    outline: "border-2 border-brand-navy text-brand-navy hover:bg-brand-light hover:text-brand-navy focus:ring-brand-navy",
-    ghost: "text-text-secondary hover:text-brand-navy hover:bg-brand-light focus:ring-brand-light"
+    primary: "bg-brand-strong text-white hover:bg-brand-navy dark:hover:bg-brand-sky dark:hover:text-brand-navy hover:shadow-lg focus:ring-brand-strong",
+    secondary: "bg-transparent text-brand-navy dark:text-text-darkPrimary border border-ui-border dark:border-brand-darkBorder hover:bg-brand-light dark:hover:bg-brand-darkElevated hover:border-brand-navy dark:hover:border-brand-sky focus:ring-brand-navy dark:focus:ring-brand-sky",
+    outline: "border-2 border-brand-navy dark:border-brand-sky text-brand-navy dark:text-brand-sky hover:bg-brand-light dark:hover:bg-brand-darkElevated focus:ring-brand-navy dark:focus:ring-brand-sky",
+    ghost: "text-text-secondary dark:text-text-darkSecondary hover:text-brand-navy dark:hover:text-text-darkPrimary hover:bg-brand-light dark:hover:bg-brand-darkElevated focus:ring-brand-light"
   };
   
   const sizes = {

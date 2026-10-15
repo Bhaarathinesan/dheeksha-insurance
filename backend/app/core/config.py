@@ -11,9 +11,8 @@ class Settings(BaseSettings):
     # CORS: comma-separated list of allowed origins
     FRONTEND_URL: str = "http://localhost:5173"
     
-    # MongoDB
-    MONGODB_URL: str = "mongodb://localhost:27017"
-    DATABASE_NAME: str = "deeksha_insurance"
+    # MariaDB / Relational Database (Async connection URL using asyncmy)
+    DATABASE_URL: str = "mysql+asyncmy://root@localhost:3306/dheeksha_insurance"
     
     # JWT
     SECRET_KEY: str
@@ -23,6 +22,15 @@ class Settings(BaseSettings):
     # Admin Credentials
     ADMIN_EMAIL: str
     ADMIN_PASSWORD: str
+
+    # Gmail SMTP Configuration
+    SMTP_HOST: str = "smtp.gmail.com"
+    SMTP_PORT: int = 587
+    SMTP_USE_TLS: bool = True
+    SMTP_EMAIL: str = ""
+    SMTP_APP_PASSWORD: str = ""
+    ENQUIRY_NOTIFICATION_EMAIL: str = "neelkanthbpvi@gmail.com"
+    SMTP_TIMEOUT: int = 10
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

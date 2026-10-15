@@ -79,6 +79,7 @@ const EnquiryList = () => {
       'CONTACTED': 'bg-yellow-100 text-yellow-700',
       'IN_PROGRESS': 'bg-purple-100 text-purple-700',
       'COMPLETED': 'bg-green-100 text-green-700',
+      'INCOMPLETE': 'bg-amber-100 text-amber-700',
       'CANCELLED': 'bg-red-100 text-red-700',
     };
     return (
@@ -146,6 +147,7 @@ const EnquiryList = () => {
             <option value="CONTACTED">Contacted</option>
             <option value="IN_PROGRESS">In Progress</option>
             <option value="COMPLETED">Completed</option>
+            <option value="INCOMPLETE">Incomplete</option>
             <option value="CANCELLED">Cancelled</option>
           </select>
 

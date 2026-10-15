@@ -28,13 +28,13 @@ const VehicleCategories = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-brand-darkBg transition-colors duration-300">
       <Container>
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-h2 md:text-h1 text-brand-navy font-bold mb-4">
+          <h2 className="text-h2 md:text-h1 text-brand-navy dark:text-text-darkPrimary font-bold mb-4">
             Insurance Assistance for Every Vehicle
           </h2>
-          <p className="text-body text-text-secondary text-lg">
+          <p className="text-text-secondary dark:text-text-darkSecondary text-base md:text-lg leading-relaxed">
             Dheeksha assists customers across different road-vehicle categories.
           </p>
         </div>

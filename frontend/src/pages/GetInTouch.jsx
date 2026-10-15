@@ -130,10 +130,10 @@ const GetInTouch = () => {
             <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-10 h-10" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 leading-tight">
               Enquiry Submitted Successfully!
             </h2>
-            <p className="text-lg text-text-secondary mb-8">
+            <p className="text-lg text-text-secondary mb-8 leading-relaxed">
               Thank you for contacting Dheeksha Insurance. Our team will get in touch with you shortly.
             </p>
             <Button variant="primary" onClick={() => {
@@ -155,10 +155,10 @@ const GetInTouch = () => {
       <Container>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-4 leading-tight">
               Get in Touch
             </h1>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-text-secondary leading-relaxed">
               Fill out the form below and our team will contact you shortly to assist with your insurance needs.
             </p>
           </div>

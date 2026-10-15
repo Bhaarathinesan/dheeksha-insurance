@@ -18,7 +18,23 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dheeksha Insurance | Vehicle Insurance & Claim Assistance" />
-    <meta name="twitter:description" content="Dheeksha Insurance is your trusted local partner for vehicle insurance, policy renewals, and end-to-end claim assistance in Peravurani, Thanjavur." />
+    <!-- Prevent FOUC: Early theme application -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('dheeksha-theme');
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.colorScheme = 'light';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

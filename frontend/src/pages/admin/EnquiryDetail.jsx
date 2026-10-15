@@ -131,6 +131,7 @@ const EnquiryDetail = () => {
       'CONTACTED': 'bg-yellow-100 text-yellow-700',
       'IN_PROGRESS': 'bg-purple-100 text-purple-700',
       'COMPLETED': 'bg-green-100 text-green-700',
+      'INCOMPLETE': 'bg-amber-100 text-amber-700',
       'CANCELLED': 'bg-red-100 text-red-700',
     };
     return (
@@ -251,7 +252,7 @@ const EnquiryDetail = () => {
                   Change Status
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {['NEW', 'CONTACTED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'].map((s) => (
+                  {['NEW', 'CONTACTED', 'IN_PROGRESS', 'COMPLETED', 'INCOMPLETE', 'CANCELLED'].map((s) => (
                     <button
                       key={s}
                       disabled={enquiry.status === s || statusUpdating}

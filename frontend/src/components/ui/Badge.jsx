@@ -2,10 +2,10 @@ import React from 'react';
 
 const Badge = ({ children, variant = 'primary', className = '' }) => {
   const variants = {
-    primary: "bg-brand-light text-brand-strong",
-    success: "bg-ui-success bg-opacity-10 text-ui-success",
-    error: "bg-ui-error bg-opacity-10 text-ui-error",
-    navy: "bg-brand-navy text-white",
+    primary: "bg-brand-light dark:bg-brand-darkElevated text-brand-strong dark:text-brand-sky",
+    success: "bg-ui-success/10 text-ui-success dark:bg-emerald-500/20 dark:text-emerald-300",
+    error: "bg-ui-error/10 text-ui-error dark:bg-red-500/20 dark:text-red-300",
+    navy: "bg-brand-navy dark:bg-brand-darkElevated text-white dark:text-brand-sky border dark:border-brand-darkBorder",
   };
 
   const variantStyle = variants[variant] || variants.primary;

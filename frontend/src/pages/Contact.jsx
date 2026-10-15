@@ -14,10 +14,10 @@ const Contact = () => {
       <section className="bg-brand-light py-16 md:py-24">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mb-6 leading-tight">
               Contact Us
             </h1>
-            <p className="text-lg md:text-xl text-text-secondary">
+            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
               Have questions about vehicle insurance, renewals, or claim assistance? Contact Dheeksha Insurance for personal guidance and support.
             </p>
           </div>
@@ -65,13 +65,13 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold text-brand-navy mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong">
+                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong mt-0.5">
                       <Phone size={24} />
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-brand-navy">Phone</h4>
+                      <h3 className="text-lg font-semibold text-brand-navy">Phone</h3>
                       {contactInfo.phones.map((phone, idx) => (
-                        <p key={idx} className={idx === 0 ? "text-text-secondary mt-1" : "text-text-secondary"}>
+                        <p key={idx} className={idx === 0 ? "text-text-secondary mt-1 leading-relaxed" : "text-text-secondary leading-relaxed"}>
                           <a href={phone.tel} className="hover:text-brand-strong transition-colors">{phone.display}</a>
                         </p>
                       ))}
@@ -79,47 +79,47 @@ const Contact = () => {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong">
+                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong mt-0.5">
                       <MessageCircle size={24} />
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-brand-navy">WhatsApp</h4>
-                      <p className="text-text-secondary mt-1">
+                      <h3 className="text-lg font-semibold text-brand-navy">WhatsApp</h3>
+                      <p className="text-text-secondary mt-1 leading-relaxed">
                         <a href={contactInfo.whatsapp.url} target="_blank" rel="noopener noreferrer" className="hover:text-brand-strong transition-colors">{contactInfo.whatsapp.display}</a>
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong">
+                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong mt-0.5">
                       <Mail size={24} />
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-brand-navy">Email</h4>
-                      <p className="text-text-secondary mt-1">
+                      <h3 className="text-lg font-semibold text-brand-navy">Email</h3>
+                      <p className="text-text-secondary mt-1 leading-relaxed">
                         <a href={contactInfo.email.mailto} className="hover:text-brand-strong transition-colors">{contactInfo.email.display}</a>
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong">
+                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong mt-0.5">
                       <Clock size={24} />
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-brand-navy">Business Hours</h4>
-                      <p className="text-text-secondary mt-1">{contactInfo.workingDays}</p>
-                      <p className="text-text-secondary">{contactInfo.workingHours}</p>
+                      <h3 className="text-lg font-semibold text-brand-navy">Business Hours</h3>
+                      <p className="text-text-secondary mt-1 leading-relaxed">{contactInfo.workingDays}</p>
+                      <p className="text-text-secondary leading-relaxed">{contactInfo.workingHours}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong">
+                    <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center flex-shrink-0 text-brand-strong mt-0.5">
                       <MapPin size={24} />
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-brand-navy">Office Location</h4>
-                      <p className="text-text-secondary mt-1 max-w-xs">{contactInfo.address}</p>
+                      <h3 className="text-lg font-semibold text-brand-navy">Office Location</h3>
+                      <p className="text-text-secondary mt-1 max-w-xs leading-relaxed">{contactInfo.address}</p>
                     </div>
                   </div>
                 </div>
@@ -132,7 +132,7 @@ const Contact = () => {
                 <div className="text-center p-8 z-10">
                   <MapPin className="w-12 h-12 text-brand-strong mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-brand-navy mb-2">Peravurani, Thanjavur</h3>
-                  <p className="text-text-secondary mb-6 max-w-sm mx-auto">
+                  <p className="text-text-secondary mb-6 max-w-sm mx-auto leading-relaxed">
                     Visit our office for personalized insurance consultation and immediate claim assistance.
                   </p>
                   <a href={contactInfo.googleMapsUrl} target="_blank" rel="noopener noreferrer">

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -12,9 +13,15 @@ export default {
           strong: "#249FC2",    // Strong Blue
           light: "#F0FAFD",     // Light Sky Blue
           navy: "#102A43",      // Deep Navy
+          darkBg: "#0B1726",    // Dark Deep Background
+          darkSurface: "#102A43", // Dark Surface / Card
+          darkElevated: "#173650", // Dark Elevated Surface
+          darkBorder: "#29465F", // Dark Border
         },
         text: {
           secondary: "#526777", // Secondary Text
+          darkPrimary: "#F5F9FC", // Dark Mode Primary Text
+          darkSecondary: "#C2D0DC", // Dark Mode Secondary Text
         },
         ui: {
           border: "#D9EEF4",    // Border
@@ -30,8 +37,8 @@ export default {
         'h1': ['clamp(2rem, 4vw + 1rem, 3rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
         'h2': ['clamp(1.75rem, 3vw + 1rem, 2.25rem)', { lineHeight: '1.3' }],
         'h3': ['clamp(1.25rem, 2vw + 1rem, 1.5rem)', { lineHeight: '1.4' }],
-        'body': ['1rem', { lineHeight: '1.5' }],
-        'small': ['0.875rem', { lineHeight: '1.4' }],
+        'body': ['1rem', { lineHeight: '1.6' }],
+        'small': ['0.875rem', { lineHeight: '1.5' }],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',

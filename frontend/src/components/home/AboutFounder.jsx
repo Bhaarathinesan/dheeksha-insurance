@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from '../layout/Container';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
@@ -6,11 +7,11 @@ import ownerPhoto from '../../assets/images/neelkanth_photo.png';
 
 const AboutFounder = () => {
   return (
-    <section className="py-24 bg-brand-light">
+    <section className="py-24 bg-brand-light dark:bg-brand-darkBg transition-colors duration-300">
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <div className="w-full md:w-5/12 relative">
-            <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-3xl overflow-hidden shadow-xl border-8 border-white bg-white relative">
+            <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-3xl overflow-hidden shadow-xl border-8 border-white dark:border-brand-darkSurface bg-white dark:bg-brand-darkSurface relative">
               {/* Fallback pattern/color when no photo is available */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-sky to-brand-strong flex items-center justify-center text-white">
                 <span className="text-6xl font-bold opacity-30">MN</span>
@@ -39,19 +40,21 @@ const AboutFounder = () => {
               title="Meet the Founder" 
               subtitle="" 
             />
-            <h3 className="text-2xl font-bold text-brand-navy mb-1">Mr. Neelkanth</h3>
-            <p className="text-brand-strong font-medium mb-6">Founder, Dheeksha Insurance</p>
+            <h3 className="text-2xl font-bold text-brand-navy dark:text-text-darkPrimary mb-1">Mr. Neelkanth</h3>
+            <p className="text-brand-strong dark:text-brand-sky font-medium mb-6">Founder, Dheeksha Insurance</p>
             
-            <div className="prose prose-lg text-text-secondary">
-              <p className="mb-6">
+            <div className="text-text-secondary dark:text-text-darkSecondary text-base md:text-lg leading-relaxed space-y-4 mb-8">
+              <p>
                 At Dheeksha Insurance, customers receive personal guidance for vehicle insurance, renewals and claim-related support.
               </p>
-              <p className="mb-8">
+              <p>
                 Mr. Neelkanth works directly with customers to help them understand the process, prepare documentation and follow up when assistance is needed.
               </p>
-              
-              <Button variant="primary">Get in Touch</Button>
             </div>
+            
+            <Link to="/get-in-touch">
+              <Button variant="primary">Get in Touch</Button>
+            </Link>
           </div>
         </div>
       </Container>

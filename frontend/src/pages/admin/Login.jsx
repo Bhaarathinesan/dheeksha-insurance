@@ -60,14 +60,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brand-light font-sans p-4">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-premium border border-ui-border p-8 md:p-10 animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center bg-brand-light dark:bg-brand-darkBg font-sans p-4 transition-colors duration-300">
+      <div className="w-full max-w-md bg-white dark:bg-brand-darkSurface rounded-3xl shadow-premium border border-ui-border dark:border-brand-darkBorder p-8 md:p-10 animate-fade-in">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-brand-navy rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 bg-brand-navy dark:bg-brand-darkElevated rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-transparent dark:border-brand-darkBorder">
+            <Shield className="w-8 h-8 text-white dark:text-brand-sky" />
           </div>
-          <h1 className="text-3xl font-bold text-brand-navy mb-2">Admin Portal</h1>
-          <p className="text-text-secondary">Sign in to manage Dheeksha Insurance</p>
+          <h1 className="text-3xl font-bold text-brand-navy dark:text-text-darkPrimary mb-2">Admin Portal</h1>
+          <p className="text-text-secondary dark:text-text-darkSecondary">Sign in to manage Dheeksha Insurance</p>
         </div>
 
         {error && (

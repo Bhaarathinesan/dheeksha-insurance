@@ -1,11 +1,11 @@
 import pytest
 from httpx import AsyncClient
-from unittest.mock import patch, AsyncMock
+from unittest.mock import patch, AsyncMock, MagicMock
 from app.core.config import Settings, settings
 
 @pytest.mark.asyncio
 async def test_health_check_success(async_client: AsyncClient):
-    """Verify health endpoint succeeds (200) when MongoDB is available and ping passes."""
+    """Verify health endpoint succeeds (200) when database is available and ping passes."""
     response = await async_client.get("/api/health")
     assert response.status_code == 200
     data = response.json()
@@ -15,8 +15,12 @@ async def test_health_check_success(async_client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_health_check_database_failure(async_client: AsyncClient):
-    """Verify health endpoint returns 503 when MongoDB is unreachable/unavailable."""
-    with patch("app.main.db.db.command", side_effect=Exception("Database unreachable")):
+    """Verify health endpoint returns 503 when database is unreachable/unavailable."""
+    mock_conn = AsyncMock()
+    mock_conn.__aenter__.side_effect = Exception("Database unreachable")
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value = mock_conn
+    with patch("app.main.engine", mock_engine):
         response = await async_client.get("/api/health")
         assert response.status_code == 503
         data = response.json()

@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col font-sans text-text-secondary bg-white">
+      <div className="min-h-screen flex flex-col font-sans text-text-secondary bg-white dark:bg-brand-darkBg dark:text-text-darkSecondary">
         <Routes>
           <Route path="/admin/*" element={null} />
           <Route path="*" element={<Navbar />} />

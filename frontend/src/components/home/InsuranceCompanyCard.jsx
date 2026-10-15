@@ -78,7 +78,7 @@ const InsuranceCompanyCard = ({ company }) => {
 
   return (
     <div 
-      className="group bg-white rounded-[20px] p-3 md:p-5 border border-ui-border shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-brand-sky/30 transition-all duration-300 flex items-center justify-center h-28 md:h-36 lg:h-40 overflow-hidden"
+      className="group bg-white rounded-[20px] p-3 md:p-5 border border-ui-border dark:border-brand-darkBorder shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-brand-sky/30 dark:hover:border-brand-sky/60 transition-all duration-300 flex items-center justify-center h-28 md:h-36 lg:h-40 overflow-hidden"
     >
       {company.logo ? (
         <div className={config.wrapperClass}>
