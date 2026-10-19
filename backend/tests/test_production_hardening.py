@@ -59,3 +59,15 @@ def test_jwt_valid_secret_accepted():
     """Verify secrets with >= 32 characters are accepted."""
     s = Settings(SECRET_KEY="a" * 32)
     assert s.SECRET_KEY == "a" * 32
+
+def test_jwt_default_expiration_is_120_minutes():
+    """Verify that ACCESS_TOKEN_EXPIRE_MINUTES defaults to 120 minutes (2 hours)."""
+    assert Settings.model_fields["ACCESS_TOKEN_EXPIRE_MINUTES"].default == 120
+
+def test_jwt_expiration_override_supported():
+    """Verify that ACCESS_TOKEN_EXPIRE_MINUTES can be overridden via configuration or argument."""
+    s = Settings(
+        SECRET_KEY="a" * 32,
+        ACCESS_TOKEN_EXPIRE_MINUTES=60
+    )
+    assert s.ACCESS_TOKEN_EXPIRE_MINUTES == 60

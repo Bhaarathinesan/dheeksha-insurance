@@ -1,31 +1,33 @@
 import React from 'react';
 import Container from '../layout/Container';
-import SectionHeading from '../ui/SectionHeading';
+import { useTranslation } from '../../i18n';
 
 const SupportSteps = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
       number: "01",
-      title: "Insurance Assistance",
-      description: "Helping you find the right policy that meets your specific vehicle needs.",
+      title: t('supportSteps.step1Title'),
+      description: t('supportSteps.step1Desc'),
       align: "start"
     },
     {
       number: "02",
-      title: "Claim Guidance",
-      description: "Step-by-step assistance when you need to file an insurance claim.",
+      title: t('supportSteps.step2Title'),
+      description: t('supportSteps.step2Desc'),
       align: "end"
     },
     {
       number: "03",
-      title: "Documentation Support",
-      description: "Assistance with all necessary paperwork to ensure a smooth process.",
+      title: t('supportSteps.step3Title'),
+      description: t('supportSteps.step3Desc'),
       align: "start"
     },
     {
       number: "04",
-      title: "Follow-up & Communication",
-      description: "We stay in touch with insurance providers and provide regular updates so you don't have to.",
+      title: t('supportSteps.step4Title'),
+      description: t('supportSteps.step4Desc'),
       align: "end"
     }
   ];
@@ -39,10 +41,10 @@ const SupportSteps = () => {
       <Container className="relative z-10">
         <div className="mb-16 max-w-3xl">
           <h2 className="text-h2 md:text-h1 font-bold leading-tight mb-4 text-white">
-            Support at Every Step
+            {t('supportSteps.title')}
           </h2>
           <p className="text-brand-light/90 text-base md:text-lg leading-relaxed">
-            From insurance guidance to claim follow-up, get personal support throughout the process.
+            {t('supportSteps.description')}
           </p>
           <div className="w-16 h-1 bg-brand-sky mt-6 rounded-full"></div>
         </div>

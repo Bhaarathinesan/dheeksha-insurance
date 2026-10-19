@@ -3,37 +3,40 @@ import Container from '../layout/Container';
 import SectionHeading from '../ui/SectionHeading';
 import Card from '../ui/Card';
 import { Shield, RefreshCw, FileText, ClipboardList, HelpCircle, HeartHandshake } from 'lucide-react';
+import { useTranslation } from '../../i18n';
 
 const ServicesSection = () => {
+  const { t } = useTranslation();
+
   const services = [
     {
-      title: "Vehicle Insurance Assistance",
-      description: "Guidance on selecting the right insurance coverage for your specific vehicle type and requirements.",
+      title: t('homeServices.s1Title'),
+      description: t('homeServices.s1Desc'),
       icon: <Shield className="w-6 h-6 text-brand-sky" />
     },
     {
-      title: "Insurance Renewal Assistance",
-      description: "Timely reminders and support to keep your vehicle protection active without any laps in coverage.",
+      title: t('homeServices.s2Title'),
+      description: t('homeServices.s2Desc'),
       icon: <RefreshCw className="w-6 h-6 text-brand-sky" />
     },
     {
-      title: "Claim Assistance",
-      description: "Dedicated support through the entire claim process, from filing to follow-up with providers.",
+      title: t('homeServices.s3Title'),
+      description: t('homeServices.s3Desc'),
       icon: <HeartHandshake className="w-6 h-6 text-brand-sky" />
     },
     {
-      title: "Policy Assistance",
-      description: "Help understanding policy terms, inclusions, exclusions, and maximizing your benefits.",
+      title: t('homeServices.s4Title'),
+      description: t('homeServices.s4Desc'),
       icon: <ClipboardList className="w-6 h-6 text-brand-sky" />
     },
     {
-      title: "Documentation Guidance",
-      description: "Clear instructions on required paperwork for new policies, renewals, or insurance claims.",
+      title: t('homeServices.s5Title'),
+      description: t('homeServices.s5Desc'),
       icon: <FileText className="w-6 h-6 text-brand-sky" />
     },
     {
-      title: "Customer Support",
-      description: "Responsive local assistance whenever you have questions about your vehicle insurance.",
+      title: t('homeServices.s6Title'),
+      description: t('homeServices.s6Desc'),
       icon: <HelpCircle className="w-6 h-6 text-brand-sky" />
     }
   ];
@@ -42,7 +45,7 @@ const ServicesSection = () => {
     <section className="py-20 bg-white dark:bg-brand-darkBg transition-colors duration-300">
       <Container>
         <SectionHeading 
-          title="How We Can Help" 
+          title={t('homeServices.sectionTitle')} 
           subtitle="" 
           centered={true} 
         />

@@ -14,6 +14,7 @@ import Dashboard from './pages/admin/Dashboard';
 import EnquiryList from './pages/admin/EnquiryList';
 import EnquiryDetail from './pages/admin/EnquiryDetail';
 import ProtectedRoute from './components/admin/ProtectedRoute';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -60,6 +61,9 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
+            {/* Catch-all 404 Route */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         

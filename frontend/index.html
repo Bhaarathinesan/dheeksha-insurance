@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Dheeksha Insurance | Vehicle Insurance & Claim Assistance in Peravurani</title>
     <meta name="description" content="Dheeksha Insurance is your trusted local partner for vehicle insurance, policy renewals, and end-to-end claim assistance in Peravurani, Thanjavur." />
     
@@ -18,10 +18,15 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dheeksha Insurance | Vehicle Insurance & Claim Assistance" />
-    <!-- Prevent FOUC: Early theme application -->
+    <!-- Prevent FOUC: Early theme and language application -->
     <script>
       (function() {
         try {
+          var savedLang = localStorage.getItem('dheeksha-language');
+          if (savedLang === 'ta' || savedLang === 'en') {
+            document.documentElement.lang = savedLang;
+            document.documentElement.setAttribute('data-language', savedLang);
+          }
           var saved = localStorage.getItem('dheeksha-theme');
           if (saved === 'dark') {
             document.documentElement.classList.add('dark');

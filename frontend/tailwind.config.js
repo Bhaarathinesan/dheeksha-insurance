@@ -30,7 +30,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'Noto Sans Tamil', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display': ['clamp(2.5rem, 5vw + 1rem, 4rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],

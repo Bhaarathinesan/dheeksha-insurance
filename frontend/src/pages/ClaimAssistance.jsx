@@ -3,40 +3,42 @@ import useDocumentTitle from '../hooks/useDocumentTitle';
 import Container from '../components/layout/Container';
 import ContactCTA from '../components/home/ContactCTA';
 import { PhoneCall, MapPin, FileCheck, Wrench, CheckCircle, Clock } from 'lucide-react';
+import { useTranslation } from '../i18n';
 
 const ClaimAssistance = () => {
-  useDocumentTitle('Claim Assistance');
+  const { t } = useTranslation();
+  useDocumentTitle(t('claimPage.docTitle'));
 
   const steps = [
     {
       icon: <AlertIcon />,
-      title: '1. Vehicle Incident',
-      description: 'An accident or incident occurs involving your insured vehicle. Ensure safety first.'
+      title: t('claimPage.step1Title'),
+      description: t('claimPage.step1Desc')
     },
     {
       icon: <PhoneCall className="w-8 h-8 text-brand-strong" />,
-      title: '2. Contact Dheeksha Insurance',
-      description: 'Notify us immediately via phone or WhatsApp. Early intimation is crucial for a smooth claim process.'
+      title: t('claimPage.step2Title'),
+      description: t('claimPage.step2Desc')
     },
     {
       icon: <MapPin className="w-8 h-8 text-brand-strong" />,
-      title: '3. Claim Guidance',
-      description: 'We guide you on immediate next steps—whether an FIR is required, where to take the vehicle, and what not to do.'
+      title: t('claimPage.step3Title'),
+      description: t('claimPage.step3Desc')
     },
     {
       icon: <FileCheck className="w-8 h-8 text-brand-strong" />,
-      title: '4. Documentation Assistance',
-      description: 'We help you compile the necessary documents (RC, Driving License, Policy Copy, FIR, etc.) required by the surveyor.'
+      title: t('claimPage.step4Title'),
+      description: t('claimPage.step4Desc')
     },
     {
       icon: <Wrench className="w-8 h-8 text-brand-strong" />,
-      title: '5. Claim Process Support',
-      description: 'We assist in liaising with the surveyor and the garage, helping to bridge communication gaps during the estimation phase.'
+      title: t('claimPage.step5Title'),
+      description: t('claimPage.step5Desc')
     },
     {
       icon: <Clock className="w-8 h-8 text-brand-strong" />,
-      title: '6. Follow-up',
-      description: 'We follow up with the insurance company on your behalf to track the progress of your claim processing.'
+      title: t('claimPage.step6Title'),
+      description: t('claimPage.step6Desc')
     }
   ];
 
@@ -46,10 +48,10 @@ const ClaimAssistance = () => {
         <Container>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-              End-to-End Claim Assistance
+              {t('claimPage.heroTitle')}
             </h1>
             <p className="text-lg md:text-xl text-brand-light opacity-90 leading-relaxed">
-              We stand by you when you need us most. Our dedicated team assists you through the entire claim process, making a stressful situation manageable.
+              {t('claimPage.heroDesc')}
             </p>
           </div>
         </Container>
@@ -58,9 +60,11 @@ const ClaimAssistance = () => {
       <section className="py-20 md:py-24 bg-white dark:bg-brand-darkBg transition-colors duration-300">
         <Container>
           <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-6">How We Assist You</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-6">
+              {t('claimPage.sectionTitle')}
+            </h2>
             <p className="text-base md:text-lg text-text-secondary dark:text-text-darkSecondary leading-relaxed">
-              Navigating an insurance claim can be complex and overwhelming. Dheeksha Insurance is here to provide guidance at every step.
+              {t('claimPage.sectionDesc')}
             </p>
           </div>
 
@@ -85,9 +89,11 @@ const ClaimAssistance = () => {
               <CheckCircle className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-brand-navy dark:text-red-200 mb-2">Important Disclaimer</h3>
+              <h3 className="text-xl font-bold text-brand-navy dark:text-red-200 mb-2">
+                {t('claimPage.disclaimerTitle')}
+              </h3>
               <p className="text-text-secondary dark:text-gray-300 leading-relaxed">
-                Dheeksha Insurance provides <span className="font-semibold text-brand-navy dark:text-white">assistance and guidance</span> throughout the claim process. However, we do not guarantee claim approval, promise specific settlement amounts, or guarantee settlement timelines. All final claim decisions and settlements are strictly at the discretion of the respective insurance company based on policy terms and conditions.
+                {t('claimPage.disclaimerText')}
               </p>
             </div>
           </div>

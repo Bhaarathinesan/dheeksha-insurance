@@ -4,8 +4,11 @@ import Container from '../layout/Container';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
 import ownerPhoto from '../../assets/images/neelkanth_photo.png';
+import { useTranslation } from '../../i18n';
 
 const AboutFounder = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-24 bg-brand-light dark:bg-brand-darkBg transition-colors duration-300">
       <Container>
@@ -37,23 +40,27 @@ const AboutFounder = () => {
           
           <div className="w-full md:w-7/12">
             <SectionHeading 
-              title="Meet the Founder" 
+              title={t('aboutFounder.sectionTitle')} 
               subtitle="" 
             />
-            <h3 className="text-2xl font-bold text-brand-navy dark:text-text-darkPrimary mb-1">Mr. Neelkanth</h3>
-            <p className="text-brand-strong dark:text-brand-sky font-medium mb-6">Founder, Dheeksha Insurance</p>
+            <h3 className="text-2xl font-bold text-brand-navy dark:text-text-darkPrimary mb-1">
+              {t('aboutFounder.founderName')}
+            </h3>
+            <p className="text-brand-strong dark:text-brand-sky font-medium mb-6">
+              {t('aboutFounder.founderTitle')}
+            </p>
             
             <div className="text-text-secondary dark:text-text-darkSecondary text-base md:text-lg leading-relaxed space-y-4 mb-8">
               <p>
-                At Dheeksha Insurance, customers receive personal guidance for vehicle insurance, renewals and claim-related support.
+                {t('aboutFounder.p1')}
               </p>
               <p>
-                Mr. Neelkanth works directly with customers to help them understand the process, prepare documentation and follow up when assistance is needed.
+                {t('aboutFounder.p2')}
               </p>
             </div>
             
             <Link to="/get-in-touch">
-              <Button variant="primary">Get in Touch</Button>
+              <Button variant="primary">{t('aboutFounder.getInTouch')}</Button>
             </Link>
           </div>
         </div>

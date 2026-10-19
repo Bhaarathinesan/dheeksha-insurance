@@ -485,3 +485,38 @@ async def test_search_and_status_filter_combination(async_client: AsyncClient, a
     assert id_c in all_ids
 
 
+async def test_create_enquiry_tamil_unicode_support(async_client: AsyncClient, admin_token: str):
+    """
+    Verify that customer enquiries containing Tamil Unicode text
+    (e.g., customer name and message in Tamil script) are successfully
+    validated, stored in the database, and returned without corruption.
+    """
+    payload = {
+        "full_name": "பாரதிநேசன்",
+        "mobile_number": "9876543210",
+        "whatsapp_number": "9876543210",
+        "vehicle_type": "two-wheeler",
+        "vehicle_registration_number": "TN 49 AB 1234",
+        "requirement": "new-insurance",
+        "message": "எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை."
+    }
+    with patch("app.api.endpoints.enquiries.send_enquiry_notification"):
+        response = await async_client.post(f"{settings.API_V1_STR}/enquiries", json=payload)
+        assert response.status_code == 201
+        data = response.json()
+        assert data["full_name"] == "பாரதிநேசன்"
+        assert data["message"] == "எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை."
+        assert data["vehicle_type"] == "two-wheeler"
+        assert data["requirement"] == "new-insurance"
+        assert data["status"] == "NEW"
+
+        # Verify retrieved data from database matches exactly without corruption
+        headers = {"Authorization": f"Bearer {admin_token}"}
+        get_res = await async_client.get(f"{settings.API_V1_STR}/enquiries/{data['id']}", headers=headers)
+        assert get_res.status_code == 200
+        saved = get_res.json()
+        assert saved["full_name"] == "பாரதிநேசன்"
+        assert saved["message"] == "எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை."
+
+
+

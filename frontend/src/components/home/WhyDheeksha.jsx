@@ -1,28 +1,30 @@
 import React from 'react';
 import Container from '../layout/Container';
-import SectionHeading from '../ui/SectionHeading';
 import { MessageSquare, Users, MapPin, CheckCircle } from 'lucide-react';
+import { useTranslation } from '../../i18n';
 
 const WhyDheeksha = () => {
+  const { t } = useTranslation();
+
   const points = [
     {
-      title: "Direct Communication",
-      description: "Speak directly with the person assisting you.",
+      title: t('whyDheeksha.point1Title'),
+      description: t('whyDheeksha.point1Desc'),
       icon: <MessageSquare className="w-7 h-7" />
     },
     {
-      title: "Personal Support",
-      description: "Get guidance based on your insurance needs.",
+      title: t('whyDheeksha.point2Title'),
+      description: t('whyDheeksha.point2Desc'),
       icon: <Users className="w-7 h-7" />
     },
     {
-      title: "Claim Assistance",
-      description: "Receive support with documentation, communication and follow-up.",
+      title: t('whyDheeksha.point3Title'),
+      description: t('whyDheeksha.point3Desc'),
       icon: <CheckCircle className="w-7 h-7" />
     },
     {
-      title: "Local Presence",
-      description: "Personal service from a locally based insurance professional.",
+      title: t('whyDheeksha.point4Title'),
+      description: t('whyDheeksha.point4Desc'),
       icon: <MapPin className="w-7 h-7" />
     }
   ];
@@ -33,10 +35,10 @@ const WhyDheeksha = () => {
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           <div className="w-full lg:w-5/12 lg:sticky lg:top-32 h-fit">
             <h2 className="text-h2 md:text-h1 font-bold text-brand-navy dark:text-text-darkPrimary leading-tight mb-6">
-              Why Choose Dheeksha Insurance?
+              {t('whyDheeksha.title')}
             </h2>
             <p className="text-base md:text-lg text-text-secondary dark:text-text-darkSecondary leading-relaxed">
-              We focus on building lasting relationships with our clients through reliable assistance, clear communication, and dedicated support.
+              {t('whyDheeksha.description')}
             </p>
           </div>
           

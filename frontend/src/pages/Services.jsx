@@ -5,55 +5,57 @@ import Container from '../components/layout/Container';
 import Button from '../components/ui/Button';
 import { Shield, RefreshCw, FileText, Briefcase, Headphones, AlertTriangle } from 'lucide-react';
 import contactInfo from '../config/contactInfo';
+import { useTranslation } from '../i18n';
 
 const Services = () => {
-  useDocumentTitle('Dheeksha Insurance | Insurance Services & Claim Assistance');
+  const { t } = useTranslation();
+  useDocumentTitle(t('servicesPage.docTitle'));
 
   const services = [
     {
-      title: 'Vehicle Insurance Assistance',
+      title: t('servicesPage.s1Title'),
       icon: <Shield className="w-8 h-8 text-brand-strong" />,
-      description: 'Guidance for customers looking for vehicle insurance options through available insurers.',
+      description: t('servicesPage.s1Desc'),
     },
     {
-      title: 'Insurance Renewal Assistance',
+      title: t('servicesPage.s2Title'),
       icon: <RefreshCw className="w-8 h-8 text-brand-strong" />,
-      description: 'Support with understanding and completing vehicle insurance renewal requirements.',
+      description: t('servicesPage.s2Desc'),
     },
     {
-      title: 'Claim Assistance',
+      title: t('servicesPage.s3Title'),
       icon: <AlertTriangle className="w-8 h-8 text-brand-strong" />,
-      description: 'Personal guidance through claim-related documentation, communication and follow-up.',
+      description: t('servicesPage.s3Desc'),
     },
     {
-      title: 'Policy Assistance',
+      title: t('servicesPage.s4Title'),
       icon: <Briefcase className="w-8 h-8 text-brand-strong" />,
-      description: 'Help understanding policy-related information and requirements.',
+      description: t('servicesPage.s4Desc'),
     },
     {
-      title: 'Documentation Guidance',
+      title: t('servicesPage.s5Title'),
       icon: <FileText className="w-8 h-8 text-brand-strong" />,
-      description: 'Guidance on the documents and information required for insurance or claim-related processes.',
+      description: t('servicesPage.s5Desc'),
     },
     {
-      title: 'Customer Support',
+      title: t('servicesPage.s6Title'),
       icon: <Headphones className="w-8 h-8 text-brand-strong" />,
-      description: 'Direct communication and personal assistance when customers need help.',
+      description: t('servicesPage.s6Desc'),
     }
   ];
 
   const claimSteps = [
-    { num: '01', title: 'Understand' },
-    { num: '02', title: 'Prepare' },
-    { num: '03', title: 'Guide' },
-    { num: '04', title: 'Follow Up' }
+    { num: '01', title: t('servicesPage.claimStep1') },
+    { num: '02', title: t('servicesPage.claimStep2') },
+    { num: '03', title: t('servicesPage.claimStep3') },
+    { num: '04', title: t('servicesPage.claimStep4') }
   ];
 
   const howWeHelpSteps = [
-    { num: '01', title: 'Understand Your Need' },
-    { num: '02', title: 'Guide You Through the Process' },
-    { num: '03', title: 'Help With Documentation' },
-    { num: '04', title: 'Follow Up When Assistance Is Needed' }
+    { num: '01', title: t('servicesPage.howStep1') },
+    { num: '02', title: t('servicesPage.howStep2') },
+    { num: '03', title: t('servicesPage.howStep3') },
+    { num: '04', title: t('servicesPage.howStep4') }
   ];
 
   return (
@@ -64,13 +66,13 @@ const Services = () => {
         <Container className="relative z-10">
           <div className="max-w-3xl">
             <span className="inline-block py-1 px-3 rounded-full bg-brand-sky/20 text-brand-sky text-sm font-semibold tracking-wider mb-6">
-              OUR SERVICES
+              {t('servicesPage.badge')}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-              Insurance Support That Stays With You
+              {t('servicesPage.heroTitle')}
             </h1>
             <p className="text-lg md:text-xl text-brand-light opacity-90 leading-relaxed max-w-2xl">
-              From vehicle insurance assistance to claim guidance, Dheeksha Insurance provides personal support throughout the process.
+              {t('servicesPage.heroDesc')}
             </p>
           </div>
         </Container>
@@ -106,10 +108,10 @@ const Services = () => {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             <div className="w-full lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-6">
-                Support Beyond the Policy
+                {t('servicesPage.featuredTitle')}
               </h2>
               <p className="text-lg text-text-secondary dark:text-text-darkSecondary leading-relaxed mb-10 max-w-lg">
-                When a claim arises, understanding the next steps can make the process easier. Dheeksha Insurance provides personal guidance with documentation, communication and follow-up.
+                {t('servicesPage.featuredDesc')}
               </p>
             </div>
             
@@ -135,7 +137,7 @@ const Services = () => {
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-6">
-              Personal Support, Step by Step
+              {t('servicesPage.howTitle')}
             </h2>
           </div>
           
@@ -161,25 +163,25 @@ const Services = () => {
         <Container>
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Need Insurance Assistance?
+              {t('contactCTA.title')}
             </h2>
             <p className="text-lg text-brand-light mb-12 opacity-90 max-w-2xl mx-auto leading-relaxed">
-              Have a question about vehicle insurance, renewal or a claim? Get in touch with Dheeksha Insurance.
+              {t('contactCTA.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/contact">
                 <Button variant="primary" className="w-full sm:w-auto px-8 py-3 text-lg">
-                  Get in Touch
+                  {t('contactCTA.getInTouch')}
                 </Button>
               </Link>
               <a href={contactInfo.phones[0].tel}>
                 <Button variant="outline" className="w-full sm:w-auto px-8 py-3 text-lg border-white text-white hover:bg-white hover:text-brand-navy">
-                  Call Us
+                  {t('contactCTA.callUs')}
                 </Button>
               </a>
               <a href={contactInfo.whatsapp.url} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="w-full sm:w-auto px-8 py-3 text-lg border-green-500 text-green-500 hover:bg-green-500 hover:text-white">
-                  WhatsApp
+                  {t('contactCTA.whatsapp')}
                 </Button>
               </a>
             </div>

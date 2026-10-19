@@ -6,42 +6,44 @@ import Button from '../components/ui/Button';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import heroVehicle from '../assets/images/hero-vehicle.jpg';
 import contactInfo from '../config/contactInfo';
+import { useTranslation } from '../i18n';
 
 const Vehicles = () => {
-  useDocumentTitle('Dheeksha Insurance | Vehicle Insurance Assistance');
+  const { t } = useTranslation();
+  useDocumentTitle(t('vehiclesPage.docTitle'));
 
   const categories = [
     {
       id: 'two-wheeler',
-      title: 'Two-Wheeler',
-      description: 'Insurance assistance for bikes and scooters used for everyday travel.',
+      title: t('vehicleCategories.twoWheelerTitle'),
+      description: t('vehiclesPage.twoWheelerDesc'),
       image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
     {
       id: 'private-vehicle',
-      title: 'Private Vehicle',
-      description: 'Guidance for personal cars and other private vehicles.',
+      title: t('vehicleCategories.privateVehicleTitle'),
+      description: t('vehiclesPage.privateVehicleDesc'),
       image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
     {
       id: 'commercial-vehicle',
-      title: 'Commercial Vehicle',
-      description: 'Insurance assistance for vehicles used for commercial purposes.',
+      title: t('vehicleCategories.commercialVehicleTitle'),
+      description: t('vehiclesPage.commercialVehicleDesc'),
       image: 'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
     {
       id: 'heavy-vehicle',
-      title: 'Heavy Vehicle',
-      description: 'Support for trucks, lorries and other heavy road vehicles.',
+      title: t('vehicleCategories.heavyVehicleTitle'),
+      description: t('vehiclesPage.heavyVehicleDesc'),
       image: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     }
   ];
 
   const supportPoints = [
-    "Insurance Guidance",
-    "Renewal Assistance",
-    "Documentation Support",
-    "Claim Assistance"
+    t('vehiclesPage.supportPoint1'),
+    t('vehiclesPage.supportPoint2'),
+    t('vehiclesPage.supportPoint3'),
+    t('vehiclesPage.supportPoint4')
   ];
 
   return (
@@ -52,17 +54,17 @@ const Vehicles = () => {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <div className="w-full lg:w-[45%]">
               <span className="inline-block py-1 px-3 rounded-full bg-brand-sky/20 text-brand-sky text-sm font-semibold tracking-wider mb-6">
-                VEHICLE INSURANCE
+                {t('vehiclesPage.badge')}
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-                Coverage Support for Every Road
+                {t('vehiclesPage.heroTitle')}
               </h1>
               <p className="text-lg md:text-xl text-brand-light opacity-90 leading-relaxed max-w-lg mb-8">
-                From everyday two-wheelers to commercial and heavy vehicles, Dheeksha Insurance helps customers with vehicle insurance assistance and guidance.
+                {t('vehiclesPage.heroDesc')}
               </p>
               <Link to="/contact">
                 <Button variant="primary" className="flex items-center gap-2 group w-fit">
-                  Get in Touch
+                  {t('contactCTA.getInTouch')}
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
@@ -110,7 +112,7 @@ const Vehicles = () => {
                   <div>
                     <Link to="/contact">
                       <Button variant="primary" className="flex items-center gap-2 group">
-                        Get in Touch
+                        {t('contactCTA.getInTouch')}
                         <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
@@ -128,10 +130,10 @@ const Vehicles = () => {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             <div className="w-full lg:w-5/12">
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-6">
-                More Than Just a Policy
+                {t('vehiclesPage.moreThanPolicyTitle')}
               </h2>
               <p className="text-lg text-text-secondary dark:text-text-darkSecondary leading-relaxed mb-8">
-                Understanding the process is just as important as choosing insurance. Dheeksha Insurance provides personal guidance when customers need assistance.
+                {t('vehiclesPage.moreThanPolicyDesc')}
               </p>
             </div>
             
@@ -155,19 +157,19 @@ const Vehicles = () => {
       <section className="py-20 bg-brand-navy dark:bg-[#07101B] text-white text-center transition-colors duration-300">
         <Container>
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Need Help With Your Vehicle Insurance?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('vehiclesPage.ctaTitle')}</h2>
             <p className="text-base md:text-lg text-brand-light mb-10 opacity-90 leading-relaxed">
-              Tell us what you need and get in touch with Dheeksha Insurance.
+              {t('vehiclesPage.ctaDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/contact">
                 <Button variant="primary" className="w-full sm:w-auto px-8 py-3 text-lg">
-                  Get in Touch
+                  {t('contactCTA.getInTouch')}
                 </Button>
               </Link>
               <a href={contactInfo.phones[0].tel}>
                 <Button variant="outline" className="w-full sm:w-auto px-8 py-3 text-lg border-white text-white hover:bg-white hover:text-brand-navy">
-                  Call Us
+                  {t('contactCTA.callUs')}
                 </Button>
               </a>
             </div>

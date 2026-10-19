@@ -1,32 +1,35 @@
 import React from 'react';
 import Container from '../layout/Container';
 import { ClipboardList, FileText, UserCheck, PhoneCall } from 'lucide-react';
+import { useTranslation } from '../../i18n';
 
 const ClaimAssistanceSection = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
       stepNum: '01',
       icon: <ClipboardList size={32} />,
-      title: 'Understand the Claim',
-      desc: 'We help you understand the claim process and requirements.'
+      title: t('homeClaim.step1Title'),
+      desc: t('homeClaim.step1Desc'),
     },
     {
       stepNum: '02',
       icon: <FileText size={32} />,
-      title: 'Prepare Documents',
-      desc: 'Guidance on collecting and submitting the correct documentation.'
+      title: t('homeClaim.step2Title'),
+      desc: t('homeClaim.step2Desc'),
     },
     {
       stepNum: '03',
       icon: <UserCheck size={32} />,
-      title: 'Get Guidance',
-      desc: 'Personal support addressing any queries you might have.'
+      title: t('homeClaim.step3Title'),
+      desc: t('homeClaim.step3Desc'),
     },
     {
       stepNum: '04',
       icon: <PhoneCall size={32} />,
-      title: 'Follow Up',
-      desc: 'We assist with communication and regular follow-ups.'
+      title: t('homeClaim.step4Title'),
+      desc: t('homeClaim.step4Desc'),
     }
   ];
 
@@ -35,10 +38,10 @@ const ClaimAssistanceSection = () => {
       <Container>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-h2 md:text-h1 text-brand-navy dark:text-text-darkPrimary font-bold mb-6">
-            With You When You Need Support Most
+            {t('homeClaim.title')}
           </h2>
           <p className="text-text-secondary dark:text-text-darkSecondary text-base md:text-lg leading-relaxed">
-            From understanding the process to documentation and follow-up, Dheeksha Insurance provides personal guidance throughout the claim journey.
+            {t('homeClaim.description')}
           </p>
         </div>
         

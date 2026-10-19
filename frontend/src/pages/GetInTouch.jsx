@@ -6,9 +6,11 @@ import Input from '../components/ui/Input';
 import Select from '../components/ui/Select';
 import Textarea from '../components/ui/Textarea';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useTranslation } from '../i18n';
 
 const GetInTouch = () => {
-  useDocumentTitle('Enquiry Form');
+  const { t } = useTranslation();
+  useDocumentTitle(t('form.docTitle'));
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -23,24 +25,25 @@ const GetInTouch = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [apiError, setApiError] = useState('');
+  const [apiErrorKey, setApiErrorKey] = useState('');
+  const [apiErrorMessage, setApiErrorMessage] = useState('');
 
   const vehicleOptions = [
-    { value: '', label: 'Select Vehicle Type', disabled: true, hidden: true },
-    { value: 'two-wheeler', label: 'Two-Wheeler' },
-    { value: 'private-car', label: 'Private Car' },
-    { value: 'commercial', label: 'Commercial Vehicle' },
-    { value: 'heavy', label: 'Heavy Vehicle' },
-    { value: 'other', label: 'Other' }
+    { value: '', label: t('form.selectVehicleType'), disabled: true, hidden: true },
+    { value: 'two-wheeler', label: t('form.vehicleTypes.twoWheeler') },
+    { value: 'private-car', label: t('form.vehicleTypes.privateCar') },
+    { value: 'commercial', label: t('form.vehicleTypes.commercial') },
+    { value: 'heavy', label: t('form.vehicleTypes.heavy') },
+    { value: 'other', label: t('form.vehicleTypes.other') }
   ];
 
   const requirementOptions = [
-    { value: '', label: 'Select Requirement', disabled: true, hidden: true },
-    { value: 'new-insurance', label: 'New Insurance' },
-    { value: 'renewal', label: 'Insurance Renewal' },
-    { value: 'claim', label: 'Claim Assistance' },
-    { value: 'policy', label: 'Policy Assistance' },
-    { value: 'other', label: 'Other' }
+    { value: '', label: t('form.selectRequirement'), disabled: true, hidden: true },
+    { value: 'new-insurance', label: t('form.requirements.newInsurance') },
+    { value: 'renewal', label: t('form.requirements.renewal') },
+    { value: 'claim', label: t('form.requirements.claim') },
+    { value: 'policy', label: t('form.requirements.policy') },
+    { value: 'other', label: t('form.requirements.other') }
   ];
 
   const handleChange = (e) => {
@@ -53,40 +56,70 @@ const GetInTouch = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full Name is required';
-    if (!formData.mobileNumber.trim()) {
-      newErrors.mobileNumber = 'Mobile Number is required';
-    } else if (!/^[0-9]{10}$/.test(formData.mobileNumber.replace(/\s+/g, ''))) {
-      newErrors.mobileNumber = 'Please enter a valid 10-digit mobile number';
-    }
-    
-    if (formData.whatsappNumber && !/^[0-9]{10}$/.test(formData.whatsappNumber.replace(/\s+/g, ''))) {
-      newErrors.whatsappNumber = 'Please enter a valid 10-digit WhatsApp number';
+    const trimmedName = formData.fullName.trim();
+    if (!trimmedName) {
+      newErrors.fullName = 'nameRequired';
+    } else if (trimmedName.length < 2) {
+      newErrors.fullName = 'nameTooShort';
     }
 
-    if (!formData.vehicleType) newErrors.vehicleType = 'Please select a vehicle type';
-    if (!formData.requirement) newErrors.requirement = 'Please select a requirement';
+    const cleanMobile = formData.mobileNumber.replace(/\s+/g, '');
+    if (!formData.mobileNumber.trim()) {
+      newErrors.mobileNumber = 'mobileRequired';
+    } else if (!/^[0-9]{10}$/.test(cleanMobile)) {
+      newErrors.mobileNumber = 'mobileInvalid';
+    }
+    
+    if (formData.whatsappNumber && formData.whatsappNumber.trim()) {
+      const cleanWhatsapp = formData.whatsappNumber.replace(/\s+/g, '');
+      if (!/^[0-9]{10}$/.test(cleanWhatsapp)) {
+        newErrors.whatsappNumber = 'whatsappInvalid';
+      }
+    }
+
+    if (!formData.vehicleType) {
+      newErrors.vehicleType = 'vehicleTypeRequired';
+    }
+    if (!formData.requirement) {
+      newErrors.requirement = 'requirementRequired';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Helper to dynamically resolve validation errors in active language
+  const getFieldError = (field) => {
+    const err = errors[field];
+    if (!err) return '';
+    return t(`form.validation.${err}`, {}, err);
+  };
+
+  // Helper to dynamically resolve API errors in active language
+  const getApiError = () => {
+    if (apiErrorKey) {
+      return t(`form.${apiErrorKey}`, {}, apiErrorKey);
+    }
+    return apiErrorMessage;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setApiError('');
+    setApiErrorKey('');
+    setApiErrorMessage('');
     
     if (validate()) {
       setIsSubmitting(true);
       
       try {
         const payload = {
-          full_name: formData.fullName,
-          mobile_number: formData.mobileNumber,
-          whatsapp_number: formData.whatsappNumber || null,
+          full_name: formData.fullName.trim(),
+          mobile_number: formData.mobileNumber.replace(/\s+/g, ''),
+          whatsapp_number: formData.whatsappNumber?.trim() ? formData.whatsappNumber.replace(/\s+/g, '') : null,
           vehicle_type: formData.vehicleType,
-          vehicle_registration_number: formData.registrationNumber || null,
+          vehicle_registration_number: formData.registrationNumber?.trim() || null,
           requirement: formData.requirement,
-          message: formData.message || null
+          message: formData.message?.trim() || null
         };
 
         // Cleanup empty strings to null for backend optional fields
@@ -103,19 +136,45 @@ const GetInTouch = () => {
         });
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.detail?.[0]?.msg || 'Failed to submit enquiry');
+          if (response.status === 429) {
+            setApiErrorKey('errorRateLimit');
+            return;
+          }
+
+          if (response.status >= 500) {
+            setApiErrorKey('errorServer');
+            return;
+          }
+
+          const errorData = await response.json().catch(() => ({}));
+          let errMsg = '';
+          if (Array.isArray(errorData.detail) && errorData.detail.length > 0) {
+            errMsg = errorData.detail[0]?.msg || '';
+          } else if (typeof errorData.detail === 'string') {
+            errMsg = errorData.detail;
+          } else if (typeof errorData.error === 'string') {
+            errMsg = errorData.error;
+          }
+
+          if (response.status === 422) {
+            setApiErrorKey('errorValidation');
+          } else if (errMsg) {
+            setApiErrorMessage(errMsg);
+          } else {
+            setApiErrorKey('errorDefault');
+          }
+          return;
         }
 
         setIsSuccess(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
         console.error('Error submitting enquiry:', error);
-        setApiError(
-          error.message === 'Failed to fetch' 
-            ? 'Cannot connect to the server. Please check your internet connection.' 
-            : error.message || 'An unexpected error occurred. Please try again.'
-        );
+        if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+          setApiErrorKey('errorNetwork');
+        } else {
+          setApiErrorKey('errorDefault');
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -126,23 +185,26 @@ const GetInTouch = () => {
     return (
       <div className="animate-fade-in min-h-[70vh] flex items-center">
         <Container>
-          <div className="max-w-2xl mx-auto text-center bg-white p-12 rounded-3xl shadow-premium border border-ui-border">
-            <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="max-w-2xl mx-auto text-center bg-white dark:bg-brand-darkSurface p-12 rounded-3xl shadow-premium border border-ui-border dark:border-brand-darkBorder">
+            <div className="w-20 h-20 bg-green-100 dark:bg-green-950/30 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-10 h-10" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 leading-tight">
-              Enquiry Submitted Successfully!
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-text-darkPrimary mb-4 leading-tight">
+              {t('form.successTitle')}
             </h2>
-            <p className="text-lg text-text-secondary mb-8 leading-relaxed">
-              Thank you for contacting Dheeksha Insurance. Our team will get in touch with you shortly.
+            <p className="text-lg text-text-secondary dark:text-text-darkSecondary mb-8 leading-relaxed">
+              {t('form.successMessage')}
             </p>
             <Button variant="primary" onClick={() => {
               setIsSuccess(false);
               setFormData({
                 fullName: '', mobileNumber: '', whatsappNumber: '', vehicleType: '', registrationNumber: '', requirement: '', message: ''
               });
+              setErrors({});
+              setApiErrorKey('');
+              setApiErrorMessage('');
             }}>
-              Submit Another Enquiry
+              {t('form.submitAnother')}
             </Button>
           </div>
         </Container>
@@ -151,101 +213,106 @@ const GetInTouch = () => {
   }
 
   return (
-    <div className="animate-fade-in bg-brand-light min-h-screen py-16 md:py-24">
+    <div className="animate-fade-in bg-brand-light dark:bg-brand-darkBg min-h-screen py-16 md:py-24 transition-colors duration-300">
       <Container>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-4 leading-tight">
-              Get in Touch
+            <h1 className="text-4xl md:text-5xl font-bold text-brand-navy dark:text-text-darkPrimary mb-4 leading-tight">
+              {t('form.pageTitle')}
             </h1>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              Fill out the form below and our team will contact you shortly to assist with your insurance needs.
+            <p className="text-lg text-text-secondary dark:text-text-darkSecondary leading-relaxed">
+              {t('form.pageSubtitle')}
             </p>
           </div>
 
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-premium border border-ui-border">
-            {apiError && (
-              <div className="mb-6 bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 flex items-start gap-3">
+          <div className="bg-white dark:bg-brand-darkSurface p-8 md:p-12 rounded-3xl shadow-premium border border-ui-border dark:border-brand-darkBorder">
+            {getApiError() && (
+              <div className="mb-6 bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-300 p-4 rounded-xl border border-red-100 dark:border-red-900/40 flex items-start gap-3">
                 <AlertCircle className="w-6 h-6 flex-shrink-0" />
-                <p>{apiError}</p>
+                <p>{getApiError()}</p>
               </div>
             )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="flex justify-end -mt-2 mb-2">
+                <span className="text-xs text-text-secondary dark:text-text-darkSecondary">
+                  {t('form.requiredNote')}
+                </span>
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="Full Name *"
+                  label={t('form.fullName')}
                   name="fullName"
-                  placeholder="Enter your full name"
+                  placeholder={t('form.fullNamePlaceholder')}
                   value={formData.fullName}
                   onChange={handleChange}
-                  error={errors.fullName}
+                  error={getFieldError('fullName')}
                   disabled={isSubmitting}
                 />
                 <Input
-                  label="Mobile Number *"
+                  label={t('form.mobileNumber')}
                   name="mobileNumber"
                   type="tel"
-                  placeholder="10-digit mobile number"
+                  placeholder={t('form.phonePlaceholder')}
                   value={formData.mobileNumber}
                   onChange={handleChange}
-                  error={errors.mobileNumber}
+                  error={getFieldError('mobileNumber')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="WhatsApp Number (Optional)"
+                  label={t('form.whatsappNumber')}
                   name="whatsappNumber"
                   type="tel"
-                  placeholder="If different from mobile"
+                  placeholder={t('form.whatsappPlaceholder')}
                   value={formData.whatsappNumber}
                   onChange={handleChange}
-                  error={errors.whatsappNumber}
+                  error={getFieldError('whatsappNumber')}
                   disabled={isSubmitting}
                 />
                 <Select
-                  label="Vehicle Type *"
+                  label={t('form.vehicleType')}
                   name="vehicleType"
                   options={vehicleOptions}
                   value={formData.vehicleType}
                   onChange={handleChange}
-                  error={errors.vehicleType}
+                  error={getFieldError('vehicleType')}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="Vehicle Registration Number (Optional)"
+                  label={t('form.vehicleRegistrationNumber')}
                   name="registrationNumber"
-                  placeholder="e.g. TN 49 AA 1234"
+                  placeholder={t('form.regNoPlaceholder')}
                   value={formData.registrationNumber}
                   onChange={handleChange}
                   disabled={isSubmitting}
                 />
                 <Select
-                  label="Requirement *"
+                  label={t('form.requirement')}
                   name="requirement"
                   options={requirementOptions}
                   value={formData.requirement}
                   onChange={handleChange}
-                  error={errors.requirement}
+                  error={getFieldError('requirement')}
                   disabled={isSubmitting}
                 />
               </div>
 
-                <Textarea
-                  label="Message (Optional)"
-                  name="message"
-                  rows={4}
-                  placeholder="Please provide any additional details..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                />
+              <Textarea
+                label={t('form.message')}
+                name="message"
+                rows={4}
+                placeholder={t('form.messagePlaceholder')}
+                value={formData.message}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
 
               <div className="pt-4">
                 <Button 
@@ -257,17 +324,17 @@ const GetInTouch = () => {
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Submitting...
+                      {t('form.submitting')}
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
                       <Send size={20} />
-                      Submit Enquiry
+                      {t('form.sendEnquiry')}
                     </span>
                   )}
                 </Button>
-                <p className="text-center text-sm text-text-secondary mt-4">
-                  By submitting this form, you agree to let our team contact you regarding your enquiry.
+                <p className="text-center text-sm text-text-secondary dark:text-text-darkSecondary mt-4">
+                  {t('form.consentText')}
                 </p>
               </div>
             </form>

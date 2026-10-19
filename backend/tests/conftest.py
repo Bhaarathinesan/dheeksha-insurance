@@ -3,7 +3,7 @@ import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.pool import StaticPool
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from app.main import app
 from app.db.base import Base
@@ -56,8 +56,11 @@ async def setup_test_db():
 
     app.dependency_overrides[get_db] = override_get_db
 
-    # Patch engine in app.main so health check uses the isolated test engine
-    with patch("app.main.engine", test_engine):
+    # Patch engine in app.main so health check uses the isolated test engine,
+    # and mock external SMTP by default to prevent real network calls and email sending during tests
+    mock_smtp_inst = MagicMock()
+    mock_smtp_inst.__enter__.return_value = mock_smtp_inst
+    with patch("app.main.engine", test_engine), patch("smtplib.SMTP", return_value=mock_smtp_inst):
         yield
 
     # Teardown

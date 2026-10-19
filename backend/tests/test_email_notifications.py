@@ -252,3 +252,36 @@ def test_send_email_sync_skips_when_credentials_missing():
             success = send_enquiry_notification(test_data)
             assert success is False
             mock_smtp.assert_not_called()
+
+
+def test_email_message_tamil_unicode_support():
+    """
+    Verify that customer enquiries containing Tamil Unicode text
+    are properly formatted into both plain-text and HTML email parts
+    without character corruption or mojibake.
+    """
+    tamil_data = {
+        "id": "tamil-uuid-9999",
+        "full_name": "பாரதிநேசன்",
+        "mobile_number": "9876543210",
+        "whatsapp_number": "9876543210",
+        "vehicle_type": "two-wheeler",
+        "vehicle_registration_number": "TN 49 AB 1234",
+        "requirement": "new-insurance",
+        "message": "எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை.",
+        "created_at": "2026-10-15T10:00:00Z"
+    }
+    msg = build_enquiry_notification_message(tamil_data)
+    assert msg["Subject"] == "New Vehicle Insurance Enquiry - Dheeksha Insurance"
+
+    # Plain text verification
+    plain_content = msg.get_body(preferencelist=("plain",)).get_content()
+    assert "Customer Name:              பாரதிநேசன்" in plain_content
+    assert "Message:                    எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை." in plain_content
+
+    # HTML verification
+    html_content = msg.get_body(preferencelist=("html",)).get_content()
+    assert "<meta charset=\"utf-8\">" in html_content
+    assert "பாரதிநேசன்" in html_content
+    assert "எனது புதிய இருசக்கர வாகனத்திற்கு விரிவான காப்பீடு தேவை." in html_content
+

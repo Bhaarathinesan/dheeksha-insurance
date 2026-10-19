@@ -9,9 +9,11 @@ import AboutFounder from '../components/home/AboutFounder';
 import ServicesSection from '../components/home/ServicesSection';
 import ClaimAssistanceSection from '../components/home/ClaimAssistanceSection';
 import ContactCTA from '../components/home/ContactCTA';
+import { useTranslation } from '../i18n';
 
 const Home = () => {
-  useDocumentTitle('Dheeksha Insurance | Vehicle Insurance & Claim Assistance');
+  const { t } = useTranslation();
+  useDocumentTitle(t('footer.tagline'));
   
   return (
     <main>
